@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Tracker</title>
+<!-- bower:css -->
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+<!-- endbower -->
+
+<!-- inject:css -->
+<link rel="stylesheet" href="css/app.css">
+<!-- endinject -->
+</head>
+
+<body ng-controller="HomeController">
+	<!-- Contain EVERYTHING -->
+	<div class="container">
+		<!-- Show Header -->
+		<div class ="row well text-center col-xs-12 col-sm-12">
+			<h1>Budget Tracker</h1>
+		</div>
+
+		<!-- Row for Informational Panels -->
+		<div class= "row">
+			<!-- Income Entries Panel -->
+			<div class = "col-xs-12 col-sm-6">
+				<div class="panel panel-success">
+					<div class="panel-heading">Income Entries</div>
+					<div class="panel-body">
+						<!-- Form holding inputs -->
+						<form>
+							<!-- Input for description of income entry -->
+							<div class="form-group">
+							<label for="description1">Description</label>
+							<input ng-model="descInc" class="form-control" id="description1" placeholder="Description">
+							</div>
+
+							<!-- Input for dollar amount of income entry -->
+							<div class="form-group">
+								<label for="exampleIncomeAmount">Amount</label>
+									<div class="input-group">
+									<div class="input-group-addon">$</div>
+									<input ng-model="amountInc" type="number" class="form-control" id="exampleIncomeAmount">
+								</div>
+							</div>
+
+							<!-- Button to Output the income entry -->
+							<button ng-click="addIncomeEntries()" type="button" class="btn btn-success btn-block">
+								<!-- Add the plus glyphicon image in the button's text -->
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								Add Income
+							</button>
+
+							<!-- Table containing the user's Output for Income Entries -->
+							<table class="table">
+								<th>Description</th>
+								<th>Amount</th>
+								<tr ng-repeat = "incomeEntry in incomeEntries">
+									<td>{{incomeEntry.descInc}}</td>
+									<td>{{incomeEntry.amountInc}}</td>
+								</tr>
+
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- Expense Entries Panel -->
+			<div class= "col-xs-12 col-sm-6">
+				<div class="panel panel-danger">
+					<div class="panel-heading">Expense Entries</div>
+					<div class="panel-body">
+						<form>
+							<!-- Input for description of Expense entry -->
+							<div class="form-group">
+							<label for="description1">Description</label>
+							<input ng-model="descExp" class="form-control" id="description1" placeholder="Description">
+							</div>
+
+							<!-- Input for dollar amount of Expense entry -->
+							<div class="form-group">
+								<label for="exampleExpenseAmount">Amount</label>
+									<div class="input-group">
+									<div class="input-group-addon">$</div>
+									<input ng-model="amountExp" type="number" class="form-control" id="exampleExpenseAmount">
+								</div>
+							</div>
+
+							<!-- Button to Output the Expense entry -->
+							<button ng-click="addExpenseEntries()" type="button" class="btn btn-danger btn-block">
+								<!-- Add the plus glyphicon image in the button's text -->
+								<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								Add Expense
+							</button>
+
+							<!-- Table containing the user's Output for Expense Entries -->
+							<table class="table">
+								<th>Description</th>
+								<th>Amount</th>
+								<tr ng-repeat = "expenseEntry in expenseEntries">
+									<td>{{expenseEntry.descExp}}</td>
+									<td>{{expenseEntry.amountExp}}</td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+		<!-- Summary panel -->
+			<div class = "col-xs-12 col-sm-6 col-sm-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Summary</div>
+					<div class="panel-body">
+						<!-- Form holding Outputs of calculations based on inputs of Income and Expense Entries -->
+						<table class = "table table-borderless">
+							<tr>
+								<th class="text-left">Total Income</th>
+								<th class="text-right">Total Expense</th>
+							</tr>
+							<tr>
+								<!-- Totals of income and expense converted to USD$ -->
+								<td class="text-left">{{newIncome | currency}}</td>
+								<td class="text-right">{{newExpense | currency}}</td>
+							</tr>
+						</table>
+						<table class = "table table-borderless">
+							<tr>
+								<th class="text-center">Left after spending</th>
+							</tr>
+							<tr>
+								<!-- Amount left after subtracting expenses from income converted to USD$ and printed -->
+								<td class="text-center">{{amountLeft | currency}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+<!-- bower:js -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<!-- endbower -->
+
+<!-- inject:js -->
+<script src="js/app.js"></script>
+<script src="js/home.controller.js"></script>
+<!-- endinject -->
+
+</body>
+</html>
